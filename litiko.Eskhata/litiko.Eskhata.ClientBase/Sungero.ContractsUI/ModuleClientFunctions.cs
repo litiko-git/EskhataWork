@@ -4,7 +4,6 @@ using System.Linq;
 using Sungero.Content.PublicFunctions;
 using Sungero.Core;
 using Sungero.CoreEntities;
-//using litiko.Eskhata.Contract;
 using Sungero.Commons.Constants;
 using litiko.Eskhata.Module.Contracts.Structures.Module;
 using Sungero.Docflow;
@@ -14,56 +13,111 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
   partial class ModuleFunctions
   {
 
-    public virtual void DeleteByKeyword()
+    public virtual void DeleteMigratedPartiesAsync()
     {
-      var dialog = Dialogs.CreateInputDialog("Удаление по ключевому слову");
-      var keywordInput = dialog.AddString("Введите слово для поиска:", true);
+      var managerRole = Sungero.CoreEntities.Roles.GetAll().FirstOrDefault(r=>r.Name == "Менеджеры модуля \"Договоры\"");
       
-      if (dialog.Show() != DialogButtons.Ok) return;
-
-      var keyword = keywordInput.Value;
-
-      var ids = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.GetContractIdsByKeyword(keyword);
-
-      if (!ids.Any())
+      var currentUser = Employees.Current;
+      
+      if(!currentUser.IncludedIn(managerRole))
       {
-        Dialogs.ShowMessage($"По запросу '{keyword}' ничего не найдено.");
+        Dialogs.ShowMessage("Недостаточно прав для выполнения данной операции");
+        return;
+      }
+      litiko.Eskhata.Module.Parties.PublicFunctions.Module.Remote.RunAsyncDeleteMigratedParties();
+      Dialogs.NotifyMessage("Запущено фоновое удаление мигрированных контрагентов. Система уведомит вас по завершении.");
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void ImportCounterpariesAsync()
+    {
+      var managerRole = Sungero.CoreEntities.Roles.GetAll().FirstOrDefault(r=>r.Name == "Менеджеры модуля \"Договоры\"");
+      
+      var currentUser = Employees.Current;
+      
+      if(!currentUser.IncludedIn(managerRole))
+      {
+        Dialogs.ShowMessage("Недостаточно прав для выполнения данной операции");
         return;
       }
       
-      var confirmDialog = Dialogs.CreateTaskDialog("Внимание!",
-                                                   $"Найдено документов: {ids.Count}.\nКритерий поиска: '{keyword}'\n\nУДАЛИТЬ ИХ БЕЗВОЗВРАТНО?",
-                                                   MessageType.Question);
+      var dialog = Dialogs.CreateInputDialog("Миграция контрагентов");
+      var fileInput = dialog.AddFileSelect("Выберите файл XML", true);
+      fileInput.WithFilter("XML", "xml");
 
-      var btnYes = confirmDialog.Buttons.AddYes();
-      confirmDialog.Buttons.AddNo();
+      if (dialog.Show() != DialogButtons.Ok) return;
 
-      if (confirmDialog.Show() != btnYes) return;
-
-      int success = 0;
-      int errors = 0;
-      string lastError = "";
-
-      foreach (var id in ids)
-      {
-        try
-        {
-          litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.DeleteContractById(id);
-          success++;
-        }
-        catch (Exception ex)
-        {
-          errors++;
-          lastError = ex.Message;
-        }
-      }
-
-      var msg = $"Готово!\n✅ Удалено: {success}\n❌ Ошибок: {errors}";
-      if (errors > 0) msg += $"\nПример ошибки: {lastError}";
+      string fileBase64 = Convert.ToBase64String(fileInput.Value.Content);
+      var msg = litiko.Eskhata.Module.Parties.PublicFunctions.Module.Remote.StartAsyncImportParties(fileBase64, fileInput.Value.Name);
       
-      Dialogs.ShowMessage(msg, errors > 0 ? MessageType.Warning : MessageType.Information);
+      Dialogs.ShowMessage(msg);
+    }
+    /// <summary>
+    /// Удаление мигрированных договоров (через асинхронный обработчик).
+    /// </summary>
+    public virtual void DeleteMigratedContractsAsync()
+    {
+      var managerRole = Sungero.CoreEntities.Roles.GetAll().FirstOrDefault(r=>r.Name == "Менеджеры модуля \"Договоры\"");
+      
+      var currentUser = Employees.Current;
+      
+      if(!currentUser.IncludedIn(managerRole))
+      {
+        Dialogs.ShowMessage("Недостаточно прав для выполнения данной операции");
+        return;
+      }
+      else
+      {
+        litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.RunAsyncDeleteMigratedContracts();
+        
+        Dialogs.NotifyMessage("Запущена фоновое удаление мигрированных договоров. Система уведомит вас по завершении.");
+      }
     }
 
+    /// <summary>
+    /// Импорт договоров из UI (перевод в фоновый режим).
+    /// </summary>
+    public virtual void ImportContractsFromUIAsync()
+    {
+      var managerRole = Sungero.CoreEntities.Roles.GetAll().FirstOrDefault(r=>r.Name == "Менеджеры модуля \"Договоры\"");
+      
+      var currentUser = Employees.Current;
+      
+      if(!currentUser.IncludedIn(managerRole))
+      {
+        Dialogs.ShowMessage("Недостаточно прав для выполнения данной операции");
+        return;
+      }
+      var dialog = Dialogs.CreateInputDialog("Миграция договоров");
+      
+      var fileInput = dialog.AddFileSelect("Выберите файл XML", true);
+      fileInput.WithFilter("XML", "xml");
+
+      if (dialog.Show() != DialogButtons.Ok) return;
+
+      byte[] fileBytes = fileInput.Value.Content;
+      string fileName = fileInput.Value.Name;
+
+      string fileBase64 = Convert.ToBase64String(fileBytes);
+      
+      try
+      {
+        var resultMessage = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.StartAsyncImportContracts(fileBase64, fileName);
+        
+        Dialogs.ShowMessage(resultMessage, MessageType.Information);
+      }
+      catch (Exception ex)
+      {
+        Dialogs.ShowMessage($"Не удалось запустить миграцию: {ex.Message}", MessageType.Error);
+      }
+    }
+
+    /*/// <summary>
+    /// Импорт контрагентов (оставляем как есть, если там данных немного,
+    /// но логика аналогична - при больших объемах тоже лучше в фон).
+    /// </summary>
     public virtual void ImportCounterparties()
     {
       var dialog = Dialogs.CreateInputDialog("Импорт контрагентов (XML)");
@@ -75,7 +129,6 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 
       byte[] fileBytes = fileInput.Value.Content;
       string fileName = fileInput.Value.Name;
-
       string fileBase64 = Convert.ToBase64String(fileBytes);
 
       try
@@ -83,98 +136,25 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
         var result = litiko.Eskhata.Module.Parties.PublicFunctions.Module.Remote.ImportCounterpartyFromXml(fileBase64, fileName);
 
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"📦 Обработка файла завершена. Всего записей: {result.TotalCount}");
-        sb.AppendLine("--------------------------------");
-
-        sb.AppendLine("🏢 Компании:");
-        sb.AppendLine($"• Всего: {result.TotalCompanies}");
-        
-        if (result.ImportedCompanies > 0)
-          sb.AppendLine($"• ✨ Новых (создано): {result.ImportedCompanies}");
-        
-        if (result.DuplicateCompanies > 0)
-          sb.AppendLine($"• 🔄 Дубликатов (обновлено): {result.DuplicateCompanies}");
-        
-        if (result.TotalCompanies > 0 && result.ImportedCompanies == 0 && result.DuplicateCompanies == 0)
-          sb.AppendLine("• ⚠️ Не импортировано (см. ошибки)");
-
-        sb.AppendLine();
-
-        sb.AppendLine("👤 Физические лица:");
-        sb.AppendLine($"• Всего: {result.TotalPersons}");
-        
-        if (result.ImportedPersons > 0)
-          sb.AppendLine($"• ✨ Новых (создано): {result.ImportedPersons}");
-        
-        if (result.DuplicatePersons > 0)
-          sb.AppendLine($"• 🔄 Дубликатов (обновлено): {result.DuplicatePersons}");
-
-        sb.AppendLine("--------------------------------");
-        
-        var totalDuplicates = result.DuplicateCompanies + result.DuplicatePersons;
-        
-        sb.AppendLine($"✅ Успешно создано: {result.ImportedCount}");
-        sb.AppendLine($"♻️ Найдено дублей: {totalDuplicates}");
-
-        if (result.Errors != null && result.Errors.Any())
-        {
-          sb.AppendLine();
-          sb.AppendLine($"⚠️ Ошибок: {result.Errors.Count}");
-        }
-        else
-        {
-          sb.AppendLine();
-          sb.AppendLine("Ошибок нет ✅");
-        }
-
-        var icon = (result.Errors != null && result.Errors.Any()) ? MessageType.Warning : MessageType.Information;
-        Dialogs.ShowMessage(sb.ToString(), icon);
-      }
-      catch (Exception ex)
-      {
-        Dialogs.ShowMessage($"Ошибка: {ex.Message}", MessageType.Error);
-      }
-    }
-
-    public virtual void ImportContractsFromUI()
-    {
-      var dialog = Dialogs.CreateInputDialog("Импорт договоров (XML)");
-      
-      var fileInput = dialog.AddFileSelect("Выберите файл XML", true);
-      fileInput.WithFilter("XML", "xml");
-
-      if (dialog.Show() != DialogButtons.Ok) return;
-
-      byte[] fileBytes = fileInput.Value.Content;
-      string fileName = fileInput.Value.Name;
-
-      string fileBase64 = Convert.ToBase64String(fileBytes);
-      try
-      {
-        var result = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.ImportContractsFromXmlUI(fileBase64, fileName);
-
-        var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"Всего записей в файле: {result.TotalCount}");
-        sb.AppendLine("--------------------------------");
-        sb.AppendLine($"✅ Создано новых: {result.ImportedCount}");
-        sb.AppendLine($"🔄 Пропущено (дубли): {result.DuplicateCount}");
+        sb.AppendLine($"📦 Обработка завершена. Всего: {result.TotalCount}");
+        sb.AppendLine($"✅ Успешно: {result.ImportedCount}");
         sb.AppendLine($"❌ Ошибок: {result.Errors.Count}");
-        
+
         if (result.Errors.Any())
         {
-          sb.AppendLine("\nСписок ошибок (первые 10):");
-          foreach(var err in result.Errors.Take(10))
+          sb.AppendLine("\nСписок ошибок:");
+          foreach(var err in result.Errors)
             sb.AppendLine("- " + err);
         }
 
         var icon = result.Errors.Any() ? MessageType.Warning : MessageType.Information;
-        
         Dialogs.ShowMessage(sb.ToString(), icon);
       }
       catch (Exception ex)
       {
         Dialogs.ShowMessage($"Ошибка: {ex.Message}", MessageType.Error);
       }
-    }
+    }*/
+      
   }
 }

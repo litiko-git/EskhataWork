@@ -10,6 +10,35 @@ namespace litiko.Eskhata
   partial class ContractualDocumentSharedHandlers
   {
 
+    public virtual void AmountForPeriodlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
+    {
+      Functions.ContractualDocument.FillTotalAmount(_obj, e.NewValue, _obj.CurrencyRatelitiko, _obj.Currency);
+    }
+
+    public virtual void IsEqualPaymentlitikoChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
+    {
+      if (e.NewValue.GetValueOrDefault())
+        _obj.IsPartialPaymentlitiko = false;      
+    }
+
+    public virtual void IsPartialPaymentlitikoChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
+    {
+      if (e.NewValue.GetValueOrDefault())
+        _obj.IsEqualPaymentlitiko = false;
+    }
+
+    public virtual void PennyAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
+    {
+      Functions.ContractualDocument.FillAmountToBePaid(_obj, _obj.TotalAmount, _obj.IncomeTaxAmountlitiko, e.NewValue);
+    }
+
+    public override void DocumentKindChanged(Sungero.Docflow.Shared.OfficialDocumentDocumentKindChangedEventArgs e)
+    {
+      base.DocumentKindChanged(e);
+      
+      _obj.IsIndividualPaymentlitiko = People.Is(_obj.Counterparty) && e.NewValue?.Name != "Аренда";
+    }
+
     public virtual void FSZNAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
     {
       Functions.ContractualDocument.FillAmountOfExpenses(_obj, _obj.Counterparty, _obj.TotalAmount, _obj.VatAmount, e.NewValue);
@@ -17,7 +46,7 @@ namespace litiko.Eskhata
 
     public virtual void IncomeTaxAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
     {
-      Functions.ContractualDocument.FillAmountToBePaid(_obj, _obj.TotalAmount, e.NewValue);
+      Functions.ContractualDocument.FillAmountToBePaid(_obj, _obj.TotalAmount, e.NewValue, _obj.PennyAmountlitiko);
     }
 
     public override void VatAmountChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
@@ -77,7 +106,7 @@ namespace litiko.Eskhata
       Functions.ContractualDocument.FillPennyAmount(_obj, e.NewValue, _obj.TaxRatelitiko, _obj.IsIndividualPaymentlitiko);
       Functions.ContractualDocument.FillIncomeTaxAmount(_obj, e.NewValue, _obj.TaxRatelitiko);      
       Functions.ContractualDocument.FillFSZNAmount(_obj, e.NewValue, _obj.TaxRatelitiko, _obj.IsIndividualPaymentlitiko);
-      Functions.ContractualDocument.FillAmountToBePaid(_obj, e.NewValue, _obj.IncomeTaxAmountlitiko);
+      Functions.ContractualDocument.FillAmountToBePaid(_obj, e.NewValue, _obj.IncomeTaxAmountlitiko, _obj.PennyAmountlitiko);
       Functions.ContractualDocument.FillAmountOfExpenses(_obj, _obj.Counterparty, e.NewValue, _obj.VatAmount, _obj.FSZNAmountlitiko);
     }
 
@@ -107,7 +136,7 @@ namespace litiko.Eskhata
       var counterprty = litiko.Eskhata.Counterparties.As(e.NewValue);
       
       _obj.IsVATlitiko = counterprty?.VATPayerlitiko;
-      _obj.IsIndividualPaymentlitiko = People.Is(counterprty);
+      _obj.IsIndividualPaymentlitiko = People.Is(counterprty) && _obj.DocumentKind?.Name != "Аренда";
       Functions.ContractualDocument.FillAmountOfExpenses(_obj, e.NewValue, _obj.TotalAmount, _obj.VatAmount, _obj.FSZNAmountlitiko);
     }
 
