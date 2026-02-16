@@ -384,6 +384,7 @@
     {
       "NameGuid": "218eef42-22a9-49aa-b5c1-1c044282e202",
       "Name": "CompleteApprovalAssignmentlitiko",
+      "DelayPeriod": 15,
       "DelayStrategy": "ExponentialDelayStrategy",
       "IsHandlerGenerated": true,
       "Parameters": [
