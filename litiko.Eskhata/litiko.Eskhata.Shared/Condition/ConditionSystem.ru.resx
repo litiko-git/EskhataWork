@@ -109,4 +109,7 @@
   <data name="Enum_ConditionType_IsDocumentRegis" xml:space="preserve">
     <value>Документ зарегистрирован</value>
   </data>
+  <data name="Enum_ConditionType_IsTenderInit" xml:space="preserve">
+    <value>Инициализация тендера</value>
+  </data>
 </root>

@@ -106,4 +106,10 @@
   <data name="IsDocumentRegistered" xml:space="preserve">
     <value>Is document registered?</value>
   </data>
+  <data name="IsTenderInitializationIsNotFilled" xml:space="preserve">
+    <value>The attribute "Tender Initialization" is not indicated in the project solution card.</value>
+  </data>
+  <data name="IsTenderInitialization" xml:space="preserve">
+    <value>Tender Initialization?</value>
+  </data>
 </root>

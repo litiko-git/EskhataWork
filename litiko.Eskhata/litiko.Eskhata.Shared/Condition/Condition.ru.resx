@@ -106,4 +106,10 @@
   <data name="IsDocumentRegistered" xml:space="preserve">
     <value>Документ зарегистрирован?</value>
   </data>
+  <data name="IsTenderInitializationIsNotFilled" xml:space="preserve">
+    <value>Признак "Инициализации тендера" не указан в карточке проектного решения.</value>
+  </data>
+  <data name="IsTenderInitialization" xml:space="preserve">
+    <value>Инициализация тендера?</value>
+  </data>
 </root>

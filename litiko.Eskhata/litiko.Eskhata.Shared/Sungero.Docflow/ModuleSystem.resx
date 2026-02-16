@@ -70,4 +70,13 @@
   <data name="CoverDescription_IncomingLetterCatlitiko" xml:space="preserve">
     <value>Additional classification of incoming letters within document kinds</value>
   </data>
+  <data name="JobDisplayName_bc01a8b288ed4578b165f1d4e140e95a" xml:space="preserve">
+    <value>Approval assignment autocompletion</value>
+  </data>
+  <data name="JobDescription_bc01a8b288ed4578b165f1d4e140e95a" xml:space="preserve">
+    <value>Completes approval assignments upon expiration of the period specified in the stage settings with the "Approved" result.</value>
+  </data>
+  <data name="AsyncHandler_Description_218eef4222a949aab5c11c044282e202" xml:space="preserve">
+    <value>Complete Approval Assignment</value>
+  </data>
 </root>

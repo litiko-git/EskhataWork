@@ -47,6 +47,9 @@ namespace litiko.Eskhata.Server
         if (_obj.ConditionType == ConditionType.IsDocumentRegis)
           return litiko.Eskhata.Conditions.Resources.IsDocumentRegistered;
         
+        if (_obj.ConditionType == ConditionType.IsTenderInit)
+          return litiko.Eskhata.Conditions.Resources.IsTenderInitialization;
+        
       }
       return base.GetConditionName();
     }

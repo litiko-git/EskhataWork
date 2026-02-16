@@ -39,6 +39,7 @@ namespace litiko.Eskhata.Shared
       baseConditions[DocflowEskhata.PublicConstants.Module.DocumentTypeGuids.OutgoingLetter.ToString()].Add(Eskhata.Condition.ConditionType.StandardRespons);
       
       baseConditions[CollegiateAgencies.PublicConstants.Module.DocumentTypeGuids.ProjectSolution.ToString()].Add(Eskhata.Condition.ConditionType.MeetingCategorylitiko);
+      baseConditions[CollegiateAgencies.PublicConstants.Module.DocumentTypeGuids.ProjectSolution.ToString()].Add(Eskhata.Condition.ConditionType.IsTenderInit);
       
       return baseConditions;
     }
@@ -178,7 +179,12 @@ namespace litiko.Eskhata.Shared
           Create(document.RegistrationState == Sungero.Docflow.OfficialDocument.RegistrationState.Registered,
                  string.Empty);
       }            
-      #endregion        
+      #endregion       
+      
+      #region Инициализация тендера
+      if (_obj.ConditionType == ConditionType.IsTenderInit)
+        return this.CheckIsTenderInitialization(document, task);      
+      #endregion
       
       return base.CheckCondition(document, task);
     }
@@ -241,6 +247,26 @@ namespace litiko.Eskhata.Shared
       }
 
       return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, Conditions.Resources.SelectApprovalRuleWithoutIsRelatedToStructureCondition);
+    }
+    
+    /// <summary>
+    /// Проверить условие "Инициализация тендера".
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="task">Задача на согласование.</param>
+    public virtual Sungero.Docflow.Structures.ConditionBase.ConditionResult CheckIsTenderInitialization(Sungero.Docflow.IOfficialDocument document, Sungero.Docflow.IApprovalTask task)
+    {
+      if (litiko.CollegiateAgencies.Projectsolutions.Is(document))
+      {
+        var projectSolutionDocument = litiko.CollegiateAgencies.Projectsolutions.As(document);
+
+        if (!projectSolutionDocument.TenderInitialization.HasValue)
+          return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, litiko.Eskhata.Conditions.Resources.IsTenderInitializationIsNotFilled);
+        
+        return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(projectSolutionDocument.TenderInitialization.Value, string.Empty);
+      }
+
+      return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, Conditions.Resources.SelectApprovalRuleWithoutIsRecommendationsCondition);
     }
     
   }

@@ -226,4 +226,10 @@
   <data name="AsyncHandler_Description_66679bfd30e048a5b51a1d1eb9535a9e" xml:space="preserve">
     <value>SetStrictMode</value>
   </data>
+  <data name="CoverAction_Tenders" xml:space="preserve">
+    <value>Tenders</value>
+  </data>
+  <data name="CoverDescription_Tenders" xml:space="preserve">
+    <value>Opening the tenders reference</value>
+  </data>
 </root>

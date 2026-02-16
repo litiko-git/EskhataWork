@@ -685,7 +685,7 @@
           "ColumnSpan": 2,
           "GroupType": "WithTitleNoBorder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
-          "RowNumber": 15,
+          "RowNumber": 17,
           "RowSpan": 1
         },
         {
@@ -780,7 +780,7 @@
           "HeaderLocation": "Top",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "e29167da-a580-4d16-bd95-5c0243d2c511",
-          "RowNumber": 16,
+          "RowNumber": 18,
           "RowSpan": 1,
           "Settings": []
         },
@@ -820,6 +820,54 @@
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "b380276b-f14e-4783-9aaa-87576bd2529b",
           "RowNumber": 14,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "44c4c367-65db-4922-a50f-2dbf5a11d479",
+          "Name": "Comment",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.TextEditorToTextBinder",
+          "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
+          "PropertyGuid": "ca70d3f0-256e-4e92-bbc3-0bb4b7c69e82",
+          "RowNumber": 15,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "Height",
+              "Value": 50
+            },
+            {
+              "Name": "NeedExpand",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "00199c27-65e4-4bbd-bc7e-c0b674fadeba",
+          "Name": "TenderInitialization",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
+          "PropertyGuid": "5267688e-572b-4375-8013-b4c4b1c2f383",
+          "RowNumber": 16,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "c2ba4a4e-4b93-48e3-9f2f-edf59cf3863d",
+          "Name": "Tender",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
+          "PropertyGuid": "9a97b712-dfa8-43e6-9f3a-e9dcbde10a00",
+          "RowNumber": 16,
           "RowSpan": 1,
           "Settings": []
         }
@@ -1341,6 +1389,33 @@
       "Code": "BudgetRemainin",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "cb06387c-9b8f-4ca9-9623-de9e813337c8"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "ca70d3f0-256e-4e92-bbc3-0bb4b7c69e82",
+      "Name": "Comment",
+      "Code": "Comment",
+      "Length": 255,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "b380276b-f14e-4783-9aaa-87576bd2529b"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5267688e-572b-4375-8013-b4c4b1c2f383",
+      "Name": "TenderInitialization",
+      "Code": "TenderInit",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "ca70d3f0-256e-4e92-bbc3-0bb4b7c69e82"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9a97b712-dfa8-43e6-9f3a-e9dcbde10a00",
+      "Name": "Tender",
+      "Code": "Tender",
+      "EntityGuid": "89154b0b-73e3-410b-bb5a-cab58d51dc57",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "5267688e-572b-4375-8013-b4c4b1c2f383"
     }
   ],
   "PublicFunctions": [

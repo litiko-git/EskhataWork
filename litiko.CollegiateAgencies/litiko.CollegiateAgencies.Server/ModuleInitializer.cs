@@ -173,6 +173,9 @@ namespace litiko.CollegiateAgencies.Server
         
         //QuestionGroups.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
         //QuestionGroups.AccessRights.Save();
+        
+        Tenders.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Create);
+        Tenders.AccessRights.Save();
       }
       
       // "Ответственные за совещания"

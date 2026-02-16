@@ -96,6 +96,31 @@ namespace litiko.Eskhata.Shared
       var type = _obj.StageType;            
       var isApprovers = type == StageType.Approvers;
       properties.AllowResultNotAgreelitiko.IsVisible = isApprovers;
+      properties.AutoCompletionlitiko.IsVisible = isApprovers;
+      var isAutoCompletion = _obj.AutoCompletionlitiko;
+      
+      
     }
+    
+    public void SetAutoCompletionFieldVisibilityAndMandatory()
+    {
+      var isAutoCompletion = _obj.AutoCompletionlitiko;
+          
+      if (isAutoCompletion != null && isAutoCompletion.Value == true)
+      {
+        _obj.State.Properties.AutoCompletionInDayslitiko.IsVisible = true;
+        _obj.State.Properties.AutoCompletionInDayslitiko.IsRequired = _obj.AutoCompletionInHourslitiko.HasValue ? false : true;
+        _obj.State.Properties.AutoCompletionInHourslitiko.IsVisible = true;
+        _obj.State.Properties.AutoCompletionInHourslitiko.IsRequired = _obj.AutoCompletionInDayslitiko.HasValue ? false : true;
+      }
+      else
+      {
+        _obj.State.Properties.AutoCompletionInDayslitiko.IsVisible = false;
+        _obj.State.Properties.AutoCompletionInDayslitiko.IsRequired = false;
+        _obj.State.Properties.AutoCompletionInHourslitiko.IsVisible = false;
+        _obj.State.Properties.AutoCompletionInHourslitiko.IsRequired = false;
+      }
+    }
+    
   }
 }

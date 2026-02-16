@@ -10,6 +10,28 @@ namespace litiko.Eskhata
   partial class ApprovalStageClientHandlers
   {
 
+    public virtual void AutoCompletionlitikoValueInput(Sungero.Presentation.BooleanValueInputEventArgs e)
+    {
+      litiko.Eskhata.Functions.ApprovalStage.SetAutoCompletionFieldVisibilityAndMandatory(_obj);
+    }
+
+    public virtual void AutoCompletionInHourslitikoValueInput(Sungero.Presentation.DoubleValueInputEventArgs e)
+    {
+      litiko.Eskhata.Functions.ApprovalStage.SetAutoCompletionFieldVisibilityAndMandatory(_obj);
+    }
+
+    public virtual void AutoCompletionInDayslitikoValueInput(Sungero.Presentation.IntegerValueInputEventArgs e)
+    {
+      litiko.Eskhata.Functions.ApprovalStage.SetAutoCompletionFieldVisibilityAndMandatory(_obj);
+    }
+
+    public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
+    {
+      base.Refresh(e);
+      
+      litiko.Eskhata.Functions.ApprovalStage.SetAutoCompletionFieldVisibilityAndMandatory(_obj);
+    }
+
     public override void AllowSendToReworkValueInput(Sungero.Presentation.BooleanValueInputEventArgs e)
     {
       base.AllowSendToReworkValueInput(e);

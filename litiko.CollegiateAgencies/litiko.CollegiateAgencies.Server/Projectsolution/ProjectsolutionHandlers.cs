@@ -253,6 +253,7 @@ namespace litiko.CollegiateAgencies
       base.Created(e);
       
       _obj.IncludedInAgenda = false;
+      _obj.TenderInitialization = false;
     }
   }
 

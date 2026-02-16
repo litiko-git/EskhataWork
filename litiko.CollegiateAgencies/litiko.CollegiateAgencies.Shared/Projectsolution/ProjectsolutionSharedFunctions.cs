@@ -70,16 +70,23 @@ namespace litiko.CollegiateAgencies.Shared
       _obj.State.Properties.Voting.IsEnabled = isEnabled && votingTableAviabled;
       #endregion
       
-      #region Контроль бюджета
+      #region Контроль бюджета и Тендер
       if (_obj.MeetingCategory?.Name != "Заседание Тендерной комиссии")
       {
         _obj.State.Properties.Budget.IsVisible = false;
         _obj.State.Properties.BudgetRemaining.IsVisible = false;
+        _obj.State.Properties.Comment.IsVisible = false;
+        _obj.State.Properties.TenderInitialization.IsVisible = false;
+        _obj.State.Properties.Tender.IsVisible = false;
+        _obj.TenderInitialization = false;
       }
       else
       {
         _obj.State.Properties.Budget.IsVisible = true;
         _obj.State.Properties.BudgetRemaining.IsVisible = true;
+        _obj.State.Properties.Comment.IsVisible = true;
+        _obj.State.Properties.TenderInitialization.IsVisible = true;
+        _obj.State.Properties.Tender.IsVisible = true;
       }
       #endregion
       
@@ -101,6 +108,7 @@ namespace litiko.CollegiateAgencies.Shared
       properties.DecidedMinutes.IsEnabled = isEnabled || isСommitteeMember || isTranslator;
       
       #endregion
+      
     }
 
     /// <summary>

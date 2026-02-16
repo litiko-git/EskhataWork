@@ -352,4 +352,13 @@
   <data name="Ribbon_TranslateHint_a1db30f36a024fa299b71c31d4ebf6ff" xml:space="preserve">
     <value />
   </data>
+  <data name="Property_Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Property_TenderInitialization" xml:space="preserve">
+    <value>Tender Initialization</value>
+  </data>
+  <data name="Property_Tender" xml:space="preserve">
+    <value>Tender</value>
+  </data>
 </root>
