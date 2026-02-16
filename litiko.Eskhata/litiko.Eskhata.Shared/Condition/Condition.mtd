@@ -159,6 +159,11 @@
           "NameGuid": "6049c60d-a560-4d2f-b3f5-38d43831d3f5",
           "Name": "IsDocumentRegis",
           "Code": "IsDocumentRegis"
+        },
+        {
+          "NameGuid": "0530116c-7068-4338-98dc-4f207a5b6943",
+          "Name": "IsTenderInit",
+          "Code": "IsTenderInit"
         }
       ],
       "IsAncestorMetadata": true,
@@ -285,7 +290,9 @@
     "OrganForApprovConditionName",
     "StandardResponseConditionName",
     "MeetingCategoryCondition",
-    "IsDocumentRegistered"
+    "IsDocumentRegistered",
+    "IsTenderInitializationIsNotFilled",
+    "IsTenderInitialization"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "997055c7-5c5b-49af-9ebd-5a00efff04ca",

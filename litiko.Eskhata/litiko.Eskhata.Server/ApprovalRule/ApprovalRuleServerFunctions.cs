@@ -24,7 +24,8 @@ namespace litiko.Eskhata.Server
       
       if (conditionType == Eskhata.Condition.ConditionType.IsRecommendat || conditionType == Eskhata.Condition.ConditionType.IsRelatedStruct || 
           conditionType == Eskhata.Condition.ConditionType.IsRequirements || conditionType == Eskhata.Condition.ConditionType.IRDType || 
-          conditionType == Eskhata.Condition.ConditionType.IRDType || conditionType == Eskhata.Condition.ConditionType.StandardRespons)
+          conditionType == Eskhata.Condition.ConditionType.IRDType || conditionType == Eskhata.Condition.ConditionType.StandardRespons ||
+          conditionType == Eskhata.Condition.ConditionType.IsTenderInit)
       {                
         possibleStage = true;
       }      

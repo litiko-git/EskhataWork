@@ -280,4 +280,13 @@
   <data name="Action_TranslateRuToTjToEn" xml:space="preserve">
     <value>Перевод с русского на таджикский и английский</value>
   </data>
+  <data name="Property_Comment" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="Property_TenderInitialization" xml:space="preserve">
+    <value>Инициализация тендера</value>
+  </data>
+  <data name="Property_Tender" xml:space="preserve">
+    <value>Тендер</value>
+  </data>
 </root>

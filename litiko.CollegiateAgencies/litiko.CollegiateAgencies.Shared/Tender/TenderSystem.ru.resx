@@ -58,58 +58,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Enum_ConditionType_ChiefAccountant" xml:space="preserve">
-    <value>Согласование с Главным бухгалтером</value>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Наименование</value>
   </data>
-  <data name="Enum_ConditionType_IsRequirements" xml:space="preserve">
-    <value>Требования учетной политики Банка</value>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Тендер</value>
   </data>
-  <data name="Enum_ConditionType_IsRecommendat" xml:space="preserve">
-    <value>Рекомендации внутреннего аудита</value>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Тендер</value>
   </data>
-  <data name="Enum_ConditionType_IsRelatedStruct" xml:space="preserve">
-    <value>Связано со структурой банка</value>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Тендеры</value>
   </data>
-  <data name="Enum_ConditionType_IRDType" xml:space="preserve">
-    <value>Тип ВНД</value>
+  <data name="Property_Code" xml:space="preserve">
+    <value>Код</value>
   </data>
-  <data name="Property_IRDTypelitiko" xml:space="preserve">
-    <value>Тип ВНД</value>
+  <data name="Property_StartDate" xml:space="preserve">
+    <value>Дата проведения с</value>
   </data>
-  <data name="Enum_IRDTypelitiko_IsNew" xml:space="preserve">
-    <value>Новый</value>
+  <data name="Property_FinishDate" xml:space="preserve">
+    <value>Дата проведения по</value>
   </data>
-  <data name="Enum_IRDTypelitiko_IsChange" xml:space="preserve">
-    <value>Изменение</value>
-  </data>
-  <data name="Enum_IRDTypelitiko_IsUpdate" xml:space="preserve">
-    <value>Актуализация без изменения</value>
-  </data>
-  <data name="Resource_8ce822b64be04603b9905ec7aec95ece" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Control_8ce822b64be04603b9905ec7aec95ece_EmptyText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Enum_ConditionType_OrganForApprov" xml:space="preserve">
-    <value>Орган утверждения</value>
-  </data>
-  <data name="Property_OrganForApprovinglitiko" xml:space="preserve">
-    <value>Орган утверждения</value>
-  </data>
-  <data name="Enum_ConditionType_StandardRespons" xml:space="preserve">
-    <value>Стандартный ответ</value>
-  </data>
-  <data name="Enum_ConditionType_MeetingCategorylitiko" xml:space="preserve">
-    <value>Категория заседания</value>
-  </data>
-  <data name="Property_MeetingCategorylitiko" xml:space="preserve">
-    <value>Категория заседания</value>
-  </data>
-  <data name="Enum_ConditionType_IsDocumentRegis" xml:space="preserve">
-    <value>Документ зарегистрирован</value>
-  </data>
-  <data name="Enum_ConditionType_IsTenderInit" xml:space="preserve">
-    <value>Инициализация тендера</value>
+  <data name="Property_Desciption" xml:space="preserve">
+    <value>Описание</value>
   </data>
 </root>

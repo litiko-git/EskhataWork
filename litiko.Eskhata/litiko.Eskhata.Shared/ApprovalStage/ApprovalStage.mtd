@@ -31,7 +31,7 @@
           "Name": "Settings",
           "ColumnDefinitions": [
             {
-              "Percentage": 50.29
+              "Percentage": 50.3
             },
             {
               "Percentage": 49.71
@@ -154,6 +154,45 @@
           "RowNumber": 4,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "b2d43714-6de0-42db-afd9-94828746c122",
+          "Name": "AutoCompletionlitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "ee6445fd-4d53-4c43-a1bd-e7edf2d737b8",
+          "PropertyGuid": "25e50fa9-11f1-40bc-8520-8f6fa0a30341",
+          "RowNumber": 5,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "637e8228-7a5a-4925-821c-c4d5cfd3ab2d",
+          "Name": "AutoCompletionInDayslitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "ee6445fd-4d53-4c43-a1bd-e7edf2d737b8",
+          "PropertyGuid": "d246d38e-9326-4755-86dc-d033774ff8a0",
+          "RowNumber": 6,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "cbb7af4f-d6a6-489e-b475-5d078a802d4e",
+          "Name": "AutoCompletionInHourslitiko",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "ee6445fd-4d53-4c43-a1bd-e7edf2d737b8",
+          "PropertyGuid": "5096b42d-5c69-4ff6-b234-d52748dcbb94",
+          "RowNumber": 6,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -164,7 +203,8 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer"
+    "CreatedServer",
+    "RefreshClient"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "bbb34726-4316-4d87-a64d-9dcf74b654f4",
@@ -275,6 +315,39 @@
       "Code": "AllowResultNot",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
       "PreviousPropertyGuid": "836b1898-a448-4910-9372-76f4d8bce756"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "25e50fa9-11f1-40bc-8520-8f6fa0a30341",
+      "Name": "AutoCompletionlitiko",
+      "Code": "AutoCompletion",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "c452a83f-9a1c-4c29-8a5c-a36eaf8ad251"
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d246d38e-9326-4755-86dc-d033774ff8a0",
+      "Name": "AutoCompletionInDayslitiko",
+      "Code": "CompleteInDa",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "25e50fa9-11f1-40bc-8520-8f6fa0a30341"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5096b42d-5c69-4ff6-b234-d52748dcbb94",
+      "Name": "AutoCompletionInHourslitiko",
+      "Code": "CompleteInHo",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "d246d38e-9326-4755-86dc-d033774ff8a0"
     }
   ],
   "PublicFunctions": [

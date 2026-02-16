@@ -567,6 +567,14 @@
       "IsAncestorMetadata": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T01:00:00"
+    },
+    {
+      "NameGuid": "bc01a8b2-88ed-4578-b165-f1d4e140e95a",
+      "Name": "ApprovalTaskAutoCompletionlitiko",
+      "Daily": "Repeat",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "TimePeriod": 60
     }
   ],
   "LayeredFromGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",

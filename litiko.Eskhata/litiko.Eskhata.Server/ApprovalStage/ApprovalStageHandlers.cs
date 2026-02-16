@@ -15,6 +15,7 @@ namespace litiko.Eskhata
       base.Created(e);
       
       _obj.AllowResultNotAgreelitiko = false;
+      _obj.AutoCompletionlitiko = false;
     }
   }
 

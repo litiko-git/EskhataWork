@@ -112,4 +112,13 @@
   <data name="Enum_CustomStageTypelitiko_Pause" xml:space="preserve">
     <value>Pause</value>
   </data>
+  <data name="Property_AutoCompletionlitiko" xml:space="preserve">
+    <value>Auto completion</value>
+  </data>
+  <data name="Property_AutoCompletionInDayslitiko" xml:space="preserve">
+    <value>Auto completion after, days</value>
+  </data>
+  <data name="Property_AutoCompletionInHourslitiko" xml:space="preserve">
+    <value>Auto completion after, hours</value>
+  </data>
 </root>
