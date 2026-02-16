@@ -71,6 +71,12 @@
     <value>Дополнительная классификация входящих писем в рамках видов документов</value>
   </data>
   <data name="JobDescription_bc01a8b288ed4578b165f1d4e140e95a" xml:space="preserve">
-    <value>Завершает задачи на согласования по истечению указанного срока в настройках етапа с результатом "Согласовано".</value>
+    <value>Завершает задания на согласования по истечению указанного срока в настройках етапа с результатом "Согласовано".</value>
+  </data>
+  <data name="AsyncHandler_Description_218eef4222a949aab5c11c044282e202" xml:space="preserve">
+    <value>Завершить задачу на согласование</value>
+  </data>
+  <data name="JobDisplayName_bc01a8b288ed4578b165f1d4e140e95a" xml:space="preserve">
+    <value>Автозавершение заданий на согласование</value>
   </data>
 </root>

@@ -380,6 +380,19 @@
           "ParameterType": "String"
         }
       ]
+    },
+    {
+      "NameGuid": "218eef42-22a9-49aa-b5c1-1c044282e202",
+      "Name": "CompleteApprovalAssignmentlitiko",
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "daf32259-e5e0-4359-b148-a60cc3fae461",
+          "Name": "ApprovalAssignmentId",
+          "ParameterType": "LongInteger"
+        }
+      ]
     }
   ],
   "BaseGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
@@ -570,7 +583,7 @@
     },
     {
       "NameGuid": "bc01a8b2-88ed-4578-b165-f1d4e140e95a",
-      "Name": "ApprovalTaskAutoCompletionlitiko",
+      "Name": "ApprovalAssignmentsAutocompletionlitiko",
       "Daily": "Repeat",
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",

@@ -12,7 +12,7 @@ namespace litiko.Eskhata.Module.Docflow.Server
     /// <summary>
     /// 
     /// </summary>
-    public virtual void ApprovalTaskAutoCompletionlitiko()
+    public virtual void ApprovalAssignmentsAutocompletionlitiko()
     {
       // Поиск всех етапов согласования с включенным автозавершением
       var stages = Sungero.Docflow.ApprovalStages.GetAll(s =>
@@ -23,7 +23,7 @@ namespace litiko.Eskhata.Module.Docflow.Server
       
       if (stages != null)
       {
-        // Поиск активных заданий на согласования, где используеться етам согласования с включенным автозавершением
+        // Поиск активных заданий на согласования, где используеться етап согласования с включенным автозавершением
         var assignments = Sungero.Docflow.ApprovalAssignments.GetAll(a => a.Status == Sungero.Workflow.AssignmentBase.Status.InProcess
                                                                        && a.Stage != null
                                                                        && stages.Contains(a.Stage)
@@ -46,9 +46,14 @@ namespace litiko.Eskhata.Module.Docflow.Server
             if (hours != null)
               autocompletionStartDate.AddWorkingHours(hours.Value);
             
-            // Проверяем если текущая дата больше даты автоматического завершения то завершаем задачу                  
+            // Проверяем если текущая дата больше даты автоматического завершения то завершаем задание                  
             if ((days != null || hours != null) && autocompletionStartDate < Calendar.Now)
-              assignment.Complete(Sungero.Docflow.ApprovalAssignment.Result.Approved);
+            {
+              // запускаем асинхронный обработчик по завершению задания "Согласование"
+              var completeApprovalAssignmentHandler = litiko.Eskhata.Module.Docflow.AsyncHandlers.CompleteApprovalAssignmentlitiko.Create();
+              completeApprovalAssignmentHandler.ApprovalAssignmentId = assignment.Id;
+              completeApprovalAssignmentHandler.ExecuteAsync();
+            }
           }
         }
       }
